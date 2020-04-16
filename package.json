@@ -1,0 +1,25 @@
+{
+  "name": "trie-implementation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sample_trie.js",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "uuid": "^7.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "SET NODE_OPTIONS=--max-old-space-size=8192 && node ./src/search.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramakrishnan3/trie-implementation.git"
+  },
+  "author": "ramakrishnan3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramakrishnan3/trie-implementation/issues"
+  },
+  "homepage": "https://github.com/ramakrishnan3/trie-implementation#readme"
+}
