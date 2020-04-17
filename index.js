@@ -1,9 +1,9 @@
-var Trie = require("../../trie-ing");
+var Trie = require("../trie-ing");
 var readline = require('readline');
 var fs = require('fs');
-var input = require("./sample"); // input file is mandatory
+var input = require("./sample/sample"); // input file is mandatory
 try {
-    var output = require("../sample_trie");
+    var output = require("./sample/sample_trie");
 } catch (e){
     var output = undefined;
 }
@@ -23,7 +23,7 @@ if ((!output || !output.root) || process.argv[2]) {
         })
     });
     // write the built trie to a file
-    fs.writeFile('sample_trie.js', `const output = ${JSON.stringify(trie)}; module.exports = output;`, function (err) {
+    fs.writeFile('./sample/sample_trie.js', `const output = ${JSON.stringify(trie)}; module.exports = output;`, function (err) {
         if (err) throw err;
     });
     const end = new Date();

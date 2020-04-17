@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "SET NODE_OPTIONS=--max-old-space-size=2048 && node ./src/search.js",
+    "start": "SET NODE_OPTIONS=--max-old-space-size=2048 && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
