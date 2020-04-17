@@ -1,9 +1,16 @@
 var Trie = require("../../trie-ing");
-var input = require("./sample");
-var output = require("../sample_trie");
+var readline = require('readline');
 var fs = require('fs');
+var input = require("./sample"); // input file is mandatory
+try {
+    var output = require("../sample_trie");
+} catch (e){
+    var output = undefined;
+}
 
-if (!output.root) {
+// Decide on building a trie from the data or loading it from already built trie data structure form file
+
+if ((!output || !output.root) || process.argv[2]) {
     const start = new Date();
     var trie = new Trie({maxWidth: 50});
     input.forEach(item => {
@@ -15,6 +22,10 @@ if (!output.root) {
             });
         })
     });
+    // write the built trie to a file
+    fs.writeFile('sample_trie.js', `const output = ${JSON.stringify(trie)}; module.exports = output;`, function (err) {
+        if (err) throw err;
+    });
     const end = new Date();
     console.log(`From Scratch, Time Taken: ${end - start}ms`);
 
@@ -22,19 +33,17 @@ if (!output.root) {
     const start = new Date();
     var trie = new Trie(output);
     const end = new Date();
-    console.log(`From Buit Trie, Time Taken: ${end - start}ms`);
+    console.log(`From Built Trie, Time Taken: ${end - start}ms`);
 }
 
+var rl = readline.createInterface(process.stdin, process.stdout);
+rl.setPrompt('Enter Prefix> ');
 
-fs.writeFile('sample_trie.js', `const output = ${JSON.stringify(trie)}; module.exports = output;`, function (err) {
-    if (err) throw err;
-    console.log('It\'s saved!', new Date());
+rl.prompt();
+rl.on('line', function(line) {
+    if (line === "exit") rl.close();
+    console.log(trie.prefixSearch(line, {limit: 10, unique: true})); // limit has to made 10
+    rl.prompt();
+}).on('close',function(){
+    process.exit(0);
 });
-
-
-// trie.root.getSortedResults("notneeded", results, opts, new PQueue(opts.limit));
-
-
-
-console.log(trie.prefixSearch('face', {limit: 3, unique: true})); 
-console.log(trie.prefixSearch('hel', {limit: 3, unique: true}));
